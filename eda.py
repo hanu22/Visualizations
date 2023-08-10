@@ -81,3 +81,39 @@ def plot_labels_value_counts(
         ),
         index=False,
     )
+
+def updated_plot_labels(df:pd.DataFrame,cols:list[str):
+    fig, ax = plt.subplots(
+    figsize=(6, 6),
+    tight_layout=True,
+    )
+    
+    data = df[cols].apply(sum)
+    
+    sns.barplot(x = data.index,y = data.values)
+    
+    ax.set(
+        xlabel="Labels",
+        ylabel="Samples No.",
+    )
+    
+    ax.tick_params(axis="x", rotation=90)
+     fig.savefig(
+        Path(
+            "statement",
+            "develop",
+            "eda",
+            f"statement_distribution_{version}.png",
+        )
+    )
+
+    df_label.to_csv(
+        Path(
+            "statement",
+            "develop",
+            "eda",
+            f"statement_distribution_{version}.csv",
+        ),
+        index=False,
+    )
+        
